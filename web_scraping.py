@@ -21,7 +21,7 @@ def get_movie_data(movies_df):
         
         # Find the movie poster image URL
         poster_img_tag = soup.find('img', class_='poster')
-        poster_img_url = poster_img_tag['src'] if poster_img_tag else None
+        poster_img_url = poster_img_tag['data-srcset'].split(" ") if poster_img_tag else None
         
         # Find the movie title and description
         title_tag = soup.find('h2', class_='9')
@@ -30,14 +30,14 @@ def get_movie_data(movies_df):
         description = description_tag.text.strip() if description_tag else None
         
         # Find the movie rating
-        rating_tag = soup.find('div', class_='false')
+        rating_tag = soup.find('section', class_='content_score')
         rating = rating_tag.text.strip() if rating_tag else None
         
         # Add the scraped data to the list
         movie_data.append({
             'title': title,
             'description': description,
-            'poster_url': root+poster_img_url,
+            'poster_url': root+poster_img_url[0],
             'rating': rating,
             'tmdbId': row['tmdbId'],
             'movieId': row['movieId']

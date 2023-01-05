@@ -30,7 +30,7 @@ def similar(movie_id):
     
     sim_users_recs = sim_users_recs.value_counts() / len(sim_users)
     sim_users_recs = sim_users_recs[sim_users_recs > .1]
-    
+
     all_users = ratings[(ratings["movieId"].isin(sim_users_recs.index)) & (ratings["rating"] > 4)]
     all_users_recs = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
     
