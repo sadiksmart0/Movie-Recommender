@@ -1,5 +1,5 @@
 import streamlit as st
-from main import search, similar
+from main import vectorize_search, recommend
 from PIL import Image
 from web_scraping import get_movie_data
 
@@ -16,8 +16,8 @@ with tab1:
     title = st.text_input("Enter Movie Title")
 
     if st.button('Search'):
-        result1 = search(title)
-        result2 = similar(result1["movieId"])
+        result1 = vectorize_search(title)
+        result2 = recommend(result1["movieId"])
         scrape = get_movie_data(result2)
 
         #Iterate through each movie in the input dataframe

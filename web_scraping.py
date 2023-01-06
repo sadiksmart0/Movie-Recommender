@@ -3,16 +3,19 @@ import requests
 from bs4 import BeautifulSoup
 
 
-root = 'https://www.themoviedb.org'
+root = 'https://www.themoviedb.org'  #ROOT LINK
 
+
+################    SCRAPING MOVIEDB FOR DATA    ###########################
 def get_movie_data(movies_df):
     movie_data = []
-    
     # Iterate through each movie in the input dataframe
     for index, row in movies_df.iterrows():
         imdb_id = row['tmdbId']
         
+        #Define header info
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
+        
         # Make a request to the IMDb calendar page for the movie
         response = requests.get(f'https://www.themoviedb.org/movie/{imdb_id}', headers=headers)
         
